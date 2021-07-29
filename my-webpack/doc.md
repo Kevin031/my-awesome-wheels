@@ -1,8 +1,6 @@
-# 代码分析Webpack打包原理
+# 代码实现简易的Webpack模块打包流程
 
 ## 目标一：手撸bundle文件
-
-
 
 这一步需要理解`bundle.js`的运行原理
 
