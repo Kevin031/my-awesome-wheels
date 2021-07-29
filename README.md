@@ -4,4 +4,4 @@
 
 ## 索引
 
-1. [webpack](./blob/master/my-webpack/doc.md)
+1. 第一周：[代码实现简易的Webpack模块打包流程](./my-webpack/doc.md)
