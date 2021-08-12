@@ -20,7 +20,7 @@
 
 | 专题| 完成情况 |
 | --- | --- |
-| [代码实现简易的Webpack模块打包流程](./my-webpack/doc.md) | 已完成 |
+| [代码实现简易的Webpack模块打包流程](./my-webpack/README.md) | 已完成 |
 | 代码实现简易Vue | 未开始 |
-| 代码实现简易的Vite | 未开始 |
+| [代码实现简易的Vite](./my-vite/README.md) | 进行中 |
 | ... | 待续 |
