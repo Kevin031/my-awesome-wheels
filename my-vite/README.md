@@ -93,9 +93,10 @@ app.use(async ctx => {
   const { url } = ctx
   
   if (url === '/') {
-    // 请求html
+    // 请求html(省略)
   } else if (url.endsWith('.js')) {
     // 请求js
+
     // 如：/src/main.js => {DIR}/src/main.js
     const dir = path.resolve(__dirname, url.slice(1))
     const content = fs.readFileSync(dir, 'utf-8')
@@ -145,24 +146,30 @@ const rewriteImport = content => {
 app.use(async ctx => {
   const { url } = ctx
   if (url === '/') {
-    // 请求html
+    // 请求html(省略)
   } else if (url.endsWith('.js')) {
     // 请求js
+
     // 如：/src/main.js => {DIR}/src/main.js
     const dir = path.resolve(__dirname, url.slice(1))
     let content = fs.readFileSync(dir, 'utf-8')
+
     // 先将js中依赖的第三方模块转成/@module/package的请求路径
     content = rewriteImport(content)
     ctx.type === 'text/javascript'
     ctx.body = content
+
   } else if (url.startsWith('/@module')) {
+
 		// 请求第三方js
     // /@module/vue => node_modules/vue => esmodule入口 === package.json => .module
     const name = url.match(/\/@module\/(.+)/)[1]
     const prefix = path.resolve(__dirname, `node_modules/${name}`)
+
     // 一般来说esmodule模块的路径都在package.json的module属性下
     const packageJSON = JSON.parse(fs.readFileSync(`${prefix}/package.json`), 'utf-8')
     let content = fs.readFileSync(`${prefix}/${packageJSON.module}`, 'utf-8')
+
     // 继续转换第三方模块，实现递归请求
     content = rewriteImport(content)
     ctx.type = 'text/javascript'
@@ -182,8 +189,10 @@ app.use(async ctx => {
   const { url } = ctx
   
   if (url === '/') {
+
     // 请求html
     const content = fs.readFileSync('./index.html', 'utf-8')
+
     // 注入环境变量js
     content = content.replace('<script', `<script>window.process = { env: { NODE_ENV: 'dev'} }</script><script `)
     ctx.type === 'text/html'
@@ -193,6 +202,10 @@ app.use(async ctx => {
 ```
 
 这样，就可以看到浏览器中渲染出了`main.js`中的`vue`组件
+
+---
+
+完整实现请看[这里](./vite.js)
 
 ## TODO
 
