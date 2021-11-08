@@ -4,24 +4,22 @@ import Form, { Field } from './components/my-rc-field-form'
 
 const { TextArea } = Input
 
-class RcFrom extends React.Component {
-  formRef = React.createRef(null)
-
+class RcForm extends React.Component {
   componentDidMount () {
-    console.log('formRef', this.formRef.current)
-    // this.formRef.current.setFieldsValue({
-    //   name: 'default',
-    //   email: 'default@example.com'
-    // })
+    console.log('this.props', this.props)
+    this.props.form.setFieldsValue({
+      name: 'default',
+      email: 'default@example.com'
+    })
   }
 
   reset = () => {
-    // this.formRef.current.resetFields()
+    this.props.form.resetFields()
   }
 
   finish = () => {
-    // const data = this.formRef.current.getFieldsValue()
-    // console.log('data', data)
+    const data = this.props.form.getFieldsValue()
+    console.log('data', data)
   }
   
   render () {
@@ -29,22 +27,20 @@ class RcFrom extends React.Component {
       width: '300px',
       margin: '50px auto'
     }}>
-      <Form
-        // ref={this.formRef}
-      >
+      <Form form={this.props.form}>
         <Field label="用户名" name="name">
           <Input />
         </Field>
         <Field label="邮箱" name="email">
           <Input />
         </Field>
-        <Field>
+        <div>
           <Button style={{ marginRight: 6 }} onClick={this.reset}>重置</Button>
           <Button type="primary" onClick={this.finish}>提交</Button>
-        </Field>
+        </div>
       </Form>
     </div>
   }
 }
 
-export default RcFrom
+export default Form.create()(RcForm)

@@ -1,7 +1,8 @@
 import React from 'react'
 import FieldContext from './FieldContext'
+import FormStore from './FormStore'
 
-export default function Form (props) {
+function Form (props) {
   const {
     form,
     onFinish = () => {},
@@ -20,3 +21,18 @@ export default function Form (props) {
     </FieldContext.Provider>
   </form>
 }
+
+Form.create = () => (WrappedComponent) => {
+  return class extends React.Component {
+    constructor () {
+      super()
+      this.formStore = new FormStore()
+    }
+
+    render () {
+      return <WrappedComponent {...this.props} form={this.formStore} />
+    }
+  }
+}
+
+export default Form
