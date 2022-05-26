@@ -26,4 +26,5 @@
 | [实现React表单库rc-field-form](./my-rc-field-form/README.md) | 已完成 |
 | [按A+规范实现最简promise](./my-promise/README.md) | 已完成 |
 | [实现一个深拷贝对象的方法](./my-clone-deep/README.md) | 未开始 |
+| [实现mobx核心功能](./my-mobx/README.md) | 已完成 |
 | ... | 待续 |
